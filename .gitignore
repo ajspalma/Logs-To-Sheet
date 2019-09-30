@@ -3,7 +3,8 @@ vendor/
 credentials/*
 uploads/*
 
-
+!uploads
+!credentials
 # Root files
 .env
 composer.json
