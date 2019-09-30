@@ -1,7 +1,0 @@
-# Don't track contents of these folders
-vendor/
-
-# Root files
-.env
-composer.json
-composer.lock
