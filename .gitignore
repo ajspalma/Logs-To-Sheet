@@ -1,10 +1,6 @@
 # Don't track contents of these folders
 vendor/
-credentials/*
-uploads/*
 
-!uploads
-!credentials
 # Root files
 .env
 composer.json
