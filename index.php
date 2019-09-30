@@ -1,3 +1,6 @@
+<?php 
+    include_once __DIR__ . '/Controller.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +10,9 @@
     <title>Logs to Google Sheets</title>
 </head>
 <body>
-    <form action="Controller.php" method="POST" enctype="multipart/form-data">
+    <form action="index.php" method="POST" enctype="multipart/form-data">
         Select Log File: <input name="log_file" type="file" />
-        <input type="submit" value="Search File" />
+        <input type="submit" value="Upload" />
     </form>
 </body>
 </html>
