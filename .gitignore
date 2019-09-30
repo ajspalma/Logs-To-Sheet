@@ -1,7 +1,7 @@
 # Don't track contents of these folders
 vendor/
-credentials/
-uploads/
+credentials/*
+uploads/*
 
 
 # Root files
