@@ -47,42 +47,44 @@ class LogSearcher {
 
         $curr_error = null;
         $error_compiled = [];
-        foreach ($arr as $key => $value) {
-            if (!array_key_exists($value['error_snippet'], $error_compiled)) {
-                
-                if (is_null($curr_error)) {
-                    $curr_error = $value['error_snippet'];
-                    $error_compiled[$curr_error] = [
-                        "date_time" => $value['date_time'],
-                        "error_snippet" => $value['error_snippet'],
-                        "line_occurence" => [],
-                        "count" => 0,
-                    ]; 
-                    foreach ($arr as $err_key => $err_val) {
-                        if ($err_val['error_snippet'] == $curr_error) {
-                            $error_compiled[$curr_error]['line_occurence'][] = $err_val['line'];
-                        }
-                    };
-                    $error_compiled[$curr_error]['count'] = count($error_compiled[$curr_error]['line_occurence']);
+        if (!empty($arr) && is_array($arr)) {
+            foreach ($arr as $key => $value) {
+                if (!array_key_exists($value['error_snippet'], $error_compiled)) {
+                    
+                    if (is_null($curr_error)) {
+                        $curr_error = $value['error_snippet'];
+                        $error_compiled[$curr_error] = [
+                            "date_time" => $value['date_time'],
+                            "error_snippet" => $value['error_snippet'],
+                            "line_occurence" => [],
+                            "count" => 0,
+                        ]; 
+                        foreach ($arr as $err_key => $err_val) {
+                            if ($err_val['error_snippet'] == $curr_error) {
+                                $error_compiled[$curr_error]['line_occurence'][] = $err_val['line'];
+                            }
+                        };
+                        $error_compiled[$curr_error]['count'] = count($error_compiled[$curr_error]['line_occurence']);
+                    }
+                    else if ($curr_error != $value['error_snippet']) {
+                        $curr_error = $value['error_snippet'];
+                        $error_compiled[$curr_error] = [
+                            "date_time" => $value['date_time'],
+                            "error_snippet" => $value['error_snippet'],
+                            "line_occurence" => [],
+                            "count" => 0,
+                        ];
+                        foreach ($arr as $err_key => $err_val) {
+                            if ($err_val['error_snippet'] == $curr_error) {
+                                $error_compiled[$curr_error]['line_occurence'][] = $err_val['line'];
+                            }
+                        }; 
+                        $error_compiled[$curr_error]['count'] = count($error_compiled[$curr_error]['line_occurence']);
+                    }
+            
                 }
-                else if ($curr_error != $value['error_snippet']) {
-                    $curr_error = $value['error_snippet'];
-                    $error_compiled[$curr_error] = [
-                        "date_time" => $value['date_time'],
-                        "error_snippet" => $value['error_snippet'],
-                        "line_occurence" => [],
-                        "count" => 0,
-                    ];
-                    foreach ($arr as $err_key => $err_val) {
-                        if ($err_val['error_snippet'] == $curr_error) {
-                            $error_compiled[$curr_error]['line_occurence'][] = $err_val['line'];
-                        }
-                    }; 
-                    $error_compiled[$curr_error]['count'] = count($error_compiled[$curr_error]['line_occurence']);
-                }
-        
+                continue;
             }
-            continue;
         }
 
         $this->error_count = $this->errors_count($error_compiled);
