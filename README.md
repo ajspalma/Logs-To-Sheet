@@ -15,7 +15,34 @@ $ php run.php
 
 ### Get your Google Credential
 
-Go to [Google Developer Console](https://console.developers.google.com) then create new project then click Enable APIs and Services > Select Google Sheets and click Enable then create and download your credentials and put it inside `/credentials`  folder.
+Go to [Google Developer Console](https://console.developers.google.com) then **create** new project then click **Enable APIs and Services** then look for **Google Sheets API** and click _Enable_. 
+
+Under **Credentials** section, fill-out all the following details:
+
+[1] Find out what kind of credentials you need
+1. Which API are you using? - Choose **Google Sheets API**
+2. Where will you be calling the API from? - Choose **Web server (e.g. node.js, Tomcat)**
+3. What data will you be accessing? - Click **Application data**
+4. Are you planning to use this API with App Engine or Compute Engine? - Select **No, I'm not using them**
+
+Then click **What credentials do I need?** button.
+
+[2] Create a service account
+1. Service account name = _nameOfYourApp_
+2. Role = _Project_ > _Owner_
+3. Key type = _JSON_
+
+Then click continue to download your credentials and put it inside `/credentials`  folder.
+
+Now, copy the value of  `client_email` property inside of the credentials.json, for example: 
+
+```sh
+"client_email": "nameofyouapp@yourprojectname.iam.gserviceaccount.com"
+```
+
+Finally, open the google spreadsheet you want to use, then click share and add the value of `client_email` that was recenlty copied.
+
+[Watch this Youtube Tutorial for detailed explanation](https://www.youtube.com/watch?v=iTZyuszEkxI)
 
 ### Configuration
 
